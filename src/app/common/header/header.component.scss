@@ -1,3 +1,4 @@
+@import 'variables';
 
 .navbar {
   padding: 20px;
@@ -14,7 +15,7 @@
     margin-right: 30px;
     font-size: 30px;
     letter-spacing: 1px;
-    color: #F44336;
+    color: $main-color;
     font-weight: 500;
   }
 
@@ -25,8 +26,8 @@
 
 
   .btn-bwm-search {
-    border-color: #F44336;
-    color: #F44336;
+    border-color: $main-color;
+    color: $main-color;
 
 
     &:hover, &:focus, &:active {
