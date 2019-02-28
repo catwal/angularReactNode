@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Rental } from './rental.model';
+import { observeOn } from 'rxjs/operator/observeOn';
 
 @Injectable()
 export class RentalService {
@@ -60,7 +61,18 @@ export class RentalService {
     }
   ];
 
+public getRentalById(rentalId: any): Observable<Rental> {
+  return new Observable<Rental>((observer) => {
+    setTimeout(() => {
+     const foundRental = this.rentals.find((rental) => {
+       console.log(rental);
 
+        return rental.id = rentalId;
+      });
+      observer.next(foundRental);
+    }, 1000);
+  });
+}
 
   public getRentals(): Observable<Array<Rental>> {
     const rentalObservable = new Observable<Array<Rental>>((observer) => {
