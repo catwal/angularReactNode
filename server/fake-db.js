@@ -43,8 +43,8 @@ class FakeDb {
   }
 
 /* éviter les doublons d'envoies automatiques */
-cleanDb(){
-  Rental.remove({});
+ async cleanDb(){
+ await Rental.remove({});
 }
 
 
