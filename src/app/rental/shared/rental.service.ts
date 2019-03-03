@@ -1,11 +1,22 @@
-import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { Rental } from './rental.model';
-import { observeOn } from 'rxjs/operator/observeOn';
+import { Injectable } from "@angular/core";
+import { Observable } from "rxjs";
+import { Rental } from "./rental.model";
+import { HttpClient } from "@angular/common/http";
 
 @Injectable()
 export class RentalService {
-  private rentals: Array<Rental> =
+  constructor(private http: HttpClient) {}
+
+  public getRentalById(rentalId: any): Observable<any> {
+    return this.http.get("/api/v1/rentals/" + rentalId);
+  }
+
+  public getRentals(): Observable<any> {
+    return this.http.get("/api/v1/rentals");
+  }
+
+  // ANCIEN CODE
+  /* private rentals: Array<Rental> =
   [
     {
       id: 1,
@@ -61,8 +72,8 @@ export class RentalService {
     }
   ];
 
-public getRentalById(rentalId: any): Observable<Rental> {
-  return new Observable<Rental>((observer) => {
+   public getRentalById(rentalId: any): Observable<Rental> {
+    return new Observable<Rental>((observer) => {
     setTimeout(() => {
      const foundRental = this.rentals.find((rental) => {
        console.log(rental);
@@ -72,10 +83,11 @@ public getRentalById(rentalId: any): Observable<Rental> {
       observer.next(foundRental);
     }, 1000);
   });
-}
+  }
 
   public getRentals(): Observable<Array<Rental>> {
-    const rentalObservable = new Observable<Array<Rental>>((observer) => {
+
+       const rentalObservable = new Observable<Array<Rental>>((observer) => {
       setTimeout(() => {
         observer.next(this.rentals)
       }, 1000);
@@ -89,6 +101,5 @@ public getRentalById(rentalId: any): Observable<Rental> {
       }, 3000);
     });
     return rentalObservable;
-  }
-
+  }*/
 }

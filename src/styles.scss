@@ -1,7 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
-@import 'variables';
+@import "variables";
 
-html, body, p {
+html,
+body,
+p {
   color: $main-text-color;
 }
 
@@ -12,32 +14,25 @@ html, body, p {
     margin-bottom: 20px;
   }
 
-
   /* SINGLE CARD STYLES*/
   .bwm-card {
     border: none;
 
-
     .card-block {
       padding-top: 8px;
-
 
       .card-subtitle {
         margin: 0;
         font-weight: 500;
         font-size: 12px;
         text-transform: uppercase;
-        color: #16861a;
+        //color: #16861a;
       }
-
-
-
 
       .card-title {
         font-size: 19px;
         margin: 3px 0;
       }
-
 
       .card-text {
         font-size: 14px;
@@ -47,4 +42,14 @@ html, body, p {
       }
     }
   }
+}
+
+.apartment {
+  color: #a72da3;
+}
+.condo {
+  color: #d68000;
+}
+.house {
+  color: #bf1818;
 }
