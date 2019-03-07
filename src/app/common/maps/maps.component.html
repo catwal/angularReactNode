@@ -1,5 +1,19 @@
-<agm-map (mapReady)="mapReadyHandler()" [latitude]="lat" [longitude]="lng">
-  <agm-marker [latitude]="lat" [longitude]="lng"></agm-marker>
-</agm-map>
+<agm-map
+  (mapReady)="mapReadyHandler()"
+  [latitude]="lat"
+  [longitude]="lng"
+  [zoom]="13"
+>
+  <agm-circle *ngIf="!isPositionError && lat && lng" [latitude]="lat" [longitude]="lng" [radius]="600" [fillColor]="'#F44336'" [fillOpacity]="0.4">
+  </agm-circle>
+  <!-- <agm-marker
+  [latitude]="lat"
+  [longitude]="lng">
+</agm-marker> -->
 
-<h1>{{location}}</h1>
+<agm-info-window *ngIf="isPositionError" [latitude]="0" [longitude]="0"
+[maxWidth]="300" [isOpen]=true>
+ Ouuuuuuuuuups! :(
+</agm-info-window>
+
+</agm-map>

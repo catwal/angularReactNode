@@ -41,7 +41,7 @@ export class MapService {
 
   public getGeolocation(location: string): Observable<any> {
     if (this.isLocationCached(location)) {
-      // même chose que observer.next()
+      // même chose que observer.next() === Observable.of()
       return Observable.of(this.locationCache[this.camelize(location)]);
     } else {
       return this.geocodeLocation(location);
