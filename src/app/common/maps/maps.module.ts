@@ -9,7 +9,7 @@ import { CommonModule } from '@angular/common';
   declarations: [MapsComponent],
   exports: [MapsComponent],
   imports: [AgmCoreModule.forRoot({
-    apiKey: 'AIzaSyClFwwrEu9xB8g1_5qkSuiHVCYvWFt7huI'
+  
   }),
   CommonModule],
   providers: [MapService, CamelizePipe],
