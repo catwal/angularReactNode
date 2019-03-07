@@ -48,3 +48,4 @@ Thumbs.db
 #fichiers ignorés personnalisés
 /server/config/dev.js
 /src/app/common/maps/maps.module.ts
+maps.module.ts
