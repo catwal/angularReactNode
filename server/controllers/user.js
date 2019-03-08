@@ -110,6 +110,9 @@ exports.register = function(req, res) {
   // res.json({ username, email });
 };
 
+/**
+ * Gestion du JWT token
+ */
 exports.authMiddleware = function(req, res, next) {
   const token = req.headers.authorization;
   if (token) {
@@ -123,27 +126,24 @@ exports.authMiddleware = function(req, res, next) {
         res.locals.user = user;
         next();
       } else {
-        return res.status(422).send({
-          errors: [
-            {
-              title: "not authorized",
-              detail: "you need to login to access"
-            }
-          ]
-        });
+        return notAuthorized(res);
       }
     });
   } else {
-    return res.status(422).send({
-      errors: [
-        {
-          title: "not authorized",
-          detail: "you need to login to access"
-        }
-      ]
-    });
+    return notAuthorized(res);
   }
   function parseToken(token) {
     return jwt.verify(token.split(" ")[1], config.SECRET);
   }
 };
+
+function notAuthorized(res) {
+  return res.status(401).send({
+    errors: [
+      {
+        title: "not authorized",
+        detail: "you need to login to access"
+      }
+    ]
+  });
+}

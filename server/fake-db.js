@@ -1,4 +1,5 @@
 const Rental = require("./models/rentalSchema");
+const User = require("./models/userSchema");
 
 class FakeDb {
   constructor() {
@@ -40,25 +41,37 @@ class FakeDb {
         dailyRate: 23
       }
     ];
+    this.users = [
+      {
+        username: "TestUser1",
+        email: "test1@gmail.com",
+        password: "testtest"
+      }
+    ];
   }
 
-/* éviter les doublons d'envoies automatiques */
- async cleanDb(){
- await Rental.remove({});
-}
+  /* éviter les doublons d'envoies automatiques */
+  async cleanDb() {
+    await User.remove({});
+    await Rental.remove({});
+  }
 
+  /* préparation des données à la BDD */
+  pushDataToDb() {
+    const user = new User(this.users[0]);
 
-/* préparation des données à la BDD */
-  pushRentalsToDb() {
     this.rentals.forEach(rental => {
       const newRental = new Rental(rental);
+      newRental.user = user;
+      user.rentals.push(newRental);
       newRental.save();
     });
+    user.save();
   }
-/* action d'envoie des données */
-  seedDb(){
-    this.cleanDb();
-    this.pushRentalsToDb();
+  /* action d'envoie des données */
+ async seedDb() {
+   await this.cleanDb();
+    this.pushDataToDb();
   }
 }
 

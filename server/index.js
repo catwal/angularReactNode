@@ -20,7 +20,7 @@ const rentalRoutes = require('./routes/rentalRoutes'),
 //Mongoose URI - connect est une promise
 mongoose.connect(config.DB_URI).then(()=>{
   const fakeDb = new FakeDb();
- // fakeDb.seedDb();
+  fakeDb.seedDb();
 });
 
 const app = express();
