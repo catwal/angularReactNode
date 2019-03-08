@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const Rental = require('../models/schemaRental');
+const Rental = require('../models/rentalSchema');
 
 
 router.get('', function(req, res){

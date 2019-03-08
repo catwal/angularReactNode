@@ -1,4 +1,4 @@
-const Rental = require("./models/schemaRental");
+const Rental = require("./models/rentalSchema");
 
 class FakeDb {
   constructor() {
