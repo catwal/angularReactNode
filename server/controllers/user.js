@@ -109,3 +109,41 @@ exports.register = function(req, res) {
 
   // res.json({ username, email });
 };
+
+exports.authMiddleware = function(req, res, next) {
+  const token = req.headers.authorization;
+  if (token) {
+    const user = parseToken(token);
+    User.findById(user.userId, function(err, user) {
+      if (err) {
+        return res.status(422).send({ errors: normelizeErrors(err.errors) });
+      }
+      if (user) {
+        // express
+        res.locals.user = user;
+        next();
+      } else {
+        return res.status(422).send({
+          errors: [
+            {
+              title: "not authorized",
+              detail: "you need to login to access"
+            }
+          ]
+        });
+      }
+    });
+  } else {
+    return res.status(422).send({
+      errors: [
+        {
+          title: "not authorized",
+          detail: "you need to login to access"
+        }
+      ]
+    });
+  }
+  function parseToken(token) {
+    return jwt.verify(token.split(" ")[1], config.SECRET);
+  }
+};
