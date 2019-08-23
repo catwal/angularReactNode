@@ -13,7 +13,7 @@ exports.auth = function(req, res) {
         { title: "Data missing", detail: "provide email and/or password" }
       ]
     });
-  }
+  };
 
   User.findOne({ email }, function(err, user) {
     if (err) {
